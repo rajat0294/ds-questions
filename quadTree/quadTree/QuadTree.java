@@ -53,4 +53,20 @@ public class QuadTree {
         this.southWest = new QuadTree(southEastBoundary, this.capacity);
     }
 
+    public List<Point> query(Boundary range) {
+        List<Point> points = new ArrayList<>();
+        if (!this.boundary.intersection(range)) {
+            return points;
+        } else if (this.divided) {
+            points.addAll(northEast.query(range));
+            points.addAll(northWest.query(range));
+            points.addAll(southEast.query(range));
+            points.addAll(southWest.query(range));
+        } else {
+            points.addAll(this.points);
+        }
+        return points;
+    }
+
+
 }

@@ -21,4 +21,13 @@ public class Boundary {
         return true;
     }
 
+    //check whether the range in query has intersection with quad tree boundary
+    public boolean intersection(Boundary range)
+    {
+    return !((range.x-range.w>this.x+this.w) ||
+            (range.x+range.w<this.x-this.w) ||
+            (range.y-range.h>this.y+this.h) ||
+            (range.y+range.h<this.y-this.h));
+    }
+
 }
