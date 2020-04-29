@@ -4,31 +4,25 @@ public class NqueenReactive {
 
     public static void nQueen(boolean[][] visited,int lqpb,int qpsf,String ansf)
     {
-        if(qpsf==visited.length && checkBoardSafe(visited))
-        {
+        if (qpsf == visited.length && checkBoardSafe(visited)) {
             System.out.println(ansf);
             return;
         }
 
-        for(int block=lqpb+1;block<visited.length *visited.length;block++)
-        {
-          int row=block/visited.length;
-          int col=block%visited.length;
-          visited[row][col]=true;
-          nQueen(visited,block,qpsf+1,"b["+row+"]["+col+"]-q"+qpsf+1);
-          visited[row][col]=false;
+        for (int block = lqpb + 1; block < visited.length * visited.length; block++) {
+            int row = block / visited.length;
+            int col = block % visited.length;
+            visited[row][col] = true;
+            nQueen(visited, block, qpsf + 1, "b[" + row + "][" + col + "]-q" + qpsf + 1);
+            visited[row][col] = false;
         }
     }
 
-    public static boolean checkBoardSafe(boolean[][] visited)
-    {
-        for(int row=0;row<visited.length;row++)
-        {
-            for(int col=0;col<visited[row].length;col++)
-            {
-                if(visited[row][col]==true)
-                {
-                    return isQueenSafe(visited,row,col);
+    public static boolean checkBoardSafe(boolean[][] visited) {
+        for (int row = 0; row < visited.length; row++) {
+            for (int col = 0; col < visited[row].length; col++) {
+                if (visited[row][col] == true) {
+                    return isQueenSafe(visited, row, col);
                 }
             }
         }

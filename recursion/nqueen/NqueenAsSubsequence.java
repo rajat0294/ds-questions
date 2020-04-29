@@ -1,25 +1,25 @@
 package nqueen;
 
-public class NQueenProactive {
+public class NqueenAsSubsequence {
 
-    public static void nQueen(boolean[][] visited,int lqpb,int qpsf,String ansf)
-    {
-        if(qpsf==visited.length)
-        {
-            System.out.println(ansf);
+    public static void nQueenSubsequence(boolean[][] visited, int qpsr, String asf, int block) {
+
+        if (qpsr == visited.length) {
+            System.out.println(asf);
             return;
         }
-
-        for(int block=lqpb+1;block<visited.length *visited[0].length;block++)
-        {
-            int row=block/visited.length;
-            int col=block%visited.length;
-            if(isQueenSafe(visited,row,col)) {
-                visited[row][col] = true;
-                nQueen(visited, block, qpsf + 1, "b[" + row + "][" + col + "]-q" + qpsf + 1);
-                visited[row][col] = false;
-            }
+        if (block > visited.length * visited[0].length) {
+            return;
         }
+        nQueenSubsequence(visited,qpsr,asf,block+1);
+        int row=block/visited.length;
+        int col=block%visited.length;
+        if(visited[row][col]==false && isQueenSafe(visited,row,col)) {
+            visited[row][col] = true;
+            nQueenSubsequence(visited, qpsr + 1, "b[" + row + "][" + col + "]-q" + qpsr + 1, block + 1);
+            visited[row][col] = false;
+        }
+
     }
 
     private static boolean isQueenSafe(boolean[][] chess, int row, int col) {
